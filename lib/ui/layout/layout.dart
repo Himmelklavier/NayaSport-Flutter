@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:prueba/ui/pages/dashboard/dashboard_add_product/dashboard_add_product.dart';
-import 'package:prueba/ui/pages/dashboard/dashboard_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:prueba/ui/pages/router.dart';
+import 'package:prueba/ui/pages/widgets/naya_navigation_bar.dart';
+import 'package:prueba/ui/providers/selected_screen_provider.dart';
 
 class LayoutPage extends StatefulWidget {
   const LayoutPage({super.key});
@@ -9,42 +12,63 @@ class LayoutPage extends StatefulWidget {
   State<LayoutPage> createState() => _LayoutPageState();
 }
 
-const List<Widget> pageSelected = <Widget>[
-  DashboardPage(),
-  DashboardAddProduct(),
-];
 
 class _LayoutPageState extends State<LayoutPage> {
   int index = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/BackgroundWhite.webp'),
-            fit: BoxFit.cover,
+    final selectedScreenProvider = Provider.of<SelectedScreenProvider>(context);
+    const String title = 'Naya Sport Store';
+
+    final List<BottomNavigationBarItem> itemsNayaNavBar = [
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.home_outlined),
+        label: 'Home',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.storefront),
+        label: 'Tienda',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.shopping_cart),
+        label: 'Carrito compras',
+      ),
+    
+    ];
+
+    return MaterialApp(
+      title: 'Naya Sport Store',
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            children: [
+              SvgPicture.asset('assets/logo2.svg'),
+              const SizedBox(width: 10.0),
+              const Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
+          backgroundColor: const Color.fromARGB(255, 52, 187, 255),
         ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text("NayaSport - Dashboard"),
-          ),
-          body: const Center(
-            child:  Text("holi"),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add), label: 'Añadir producto')
-              ],
-              currentIndex: index,
-              onTap: (int indexSelected) => setState(() {
-                    index = indexSelected;
-                  })),
-        ));
+        body: screens[selectedScreenProvider.selectedIndex],
+        bottomNavigationBar: NayaNavigationBar(
+          items: itemsNayaNavBar,
+          onItemSelected: (int index) {
+            Provider.of<SelectedScreenProvider>(context, listen: false)
+                .updateSelectedIndex(index);
+          },
+        ),
+      ),
+    );
   }
 }

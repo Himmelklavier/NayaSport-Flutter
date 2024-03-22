@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:prueba/ui/layout/layout.dart';
-import 'package:prueba/ui/pages/home/home_page.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+import 'package:prueba/data/services/shop/shop_service_impl.dart';
+import 'package:prueba/dependency_injection/services_register.dart';
 import 'package:prueba/ui/pages/router.dart';
+import 'package:prueba/ui/providers/selected_screen_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  // GetIt.I.registerSingleton<ShopServiceImpl>(ShopServiceImpl());
+  injectorServices();
+  runApp(
+    ChangeNotifierProvider<SelectedScreenProvider>(
+      create: (context) => SelectedScreenProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'NayaSport',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
         useMaterial3: true,
@@ -22,22 +32,5 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: appRouter(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return const HomePage();
   }
 }

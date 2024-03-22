@@ -7,6 +7,7 @@ class Product {
   late String _description;
   late int _category;
   late String _brand;
+  
 
   Product.empty() {
     _productName = '';
