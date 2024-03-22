@@ -17,8 +17,13 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
   File? _file;
   late dynamic result;
   var product = Product.empty();
+  bool _isButtonDisabled = false;
 
   final formKey = GlobalKey<FormState>();
+  initState() {
+   super.initState();
+  _isButtonDisabled = false;
+   }
 
   pickImage(ImageSource source) {
     MyImage(source: source).pick(onPick: (File? file) {
@@ -56,10 +61,15 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
     if (response.statusCode == 200) {
       print(await response.stream.bytesToString());
       print("exito");
+     
     } else {
       print(response.reasonPhrase);
       print("error");
+      
     }
+    setState(() {
+      _isButtonDisabled = false;
+    });
   }
 
   @override
@@ -91,6 +101,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                               ),
                               onSaved: (value) {
                                 product.productName = value.toString();
+                                print('Valor guardado en product.name: ${product.productName}');
                               },
                               // ignore: body_might_complete_normally_nullable
                               validator: (value) {
@@ -105,6 +116,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                               ),
                               onSaved: (value) {
                                 product.ref = value.toString();
+                                print('Valor guardado en product.ref: ${product.ref}');
                               },
                               // ignore: body_might_complete_normally_nullable
                               validator: (value) {
@@ -119,6 +131,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                               ),
                               onSaved: (value) {
                                 product.cost = int.parse(value.toString());
+                                print('Valor guardado en product.cost: ${product.cost}');
                               },
                               // ignore: body_might_complete_normally_nullable
                               validator: (value) {
@@ -134,6 +147,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                               onSaved: (value) {
                                 product.sellingPrice =
                                     int.parse(value.toString());
+                                    print('Valor guardado en product.sellingprice: ${product.sellingPrice}');
                               },
                               // ignore: body_might_complete_normally_nullable
                               validator: (value) {
@@ -162,6 +176,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                               ),
                               onSaved: (value) {
                                 product.size = value.toString();
+                                print('Valor guardado en product.size: ${product.size}');
                               },
                               // ignore: body_might_complete_normally_nullable
                               validator: (value) {
