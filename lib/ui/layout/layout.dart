@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:prueba/ui/pages/router.dart';
 import 'package:prueba/ui/pages/widgets/naya_navigation_bar.dart';
 import 'package:prueba/ui/providers/selected_screen_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LayoutPage extends StatefulWidget {
-  const LayoutPage({super.key});
+  final int index;
+  const LayoutPage({Key});
 
   @override
   State<LayoutPage> createState() => _LayoutPageState();
@@ -36,6 +38,13 @@ class _LayoutPageState extends State<LayoutPage> {
       ),
     
     ];
+    Future<void> _logout(BuildContext context) async{
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('accessToken');
+      await prefs.remove('idUsuario');
+      await prefs.remove('rol');
+      Navigator.of(context).pushReplacementNamed(AppRoutes.layout);
+    }
 
     return MaterialApp(
       title: 'Naya Sport Store',
@@ -45,8 +54,9 @@ class _LayoutPageState extends State<LayoutPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset('assets/logo2.svg'),
+              SvgPicture.asset('assets/logo2.svg', height:45),
               const SizedBox(width: 10.0),
               const Text(
                 title,
@@ -56,6 +66,10 @@ class _LayoutPageState extends State<LayoutPage> {
                   color: Colors.white,
                 ),
               ),
+              IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () => _logout(context),
+              )
             ],
           ),
           backgroundColor: const Color.fromARGB(255, 52, 187, 255),

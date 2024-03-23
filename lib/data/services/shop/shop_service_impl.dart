@@ -5,7 +5,7 @@ import 'package:prueba/domain/entities/Shop.dart';
 import 'package:prueba/domain/repositories/shop_repository.dart';
 
 class ShopServiceImpl implements ShopRepository {
-  final baseApi = "http://192.168.0.3:3001/api/cart";
+  final baseApi = "http://192.168.12.156:3001/api/cart";
 
   @override
   Future<int?> addProductShop(
@@ -77,6 +77,7 @@ class ShopServiceImpl implements ShopRepository {
       List<dynamic> dataDecode = json.decode(response.body);
       List<Shop> shopList =
           dataDecode.map((json) => Shop.fromJson(json)).toList();
+      print('ShopList-> $shopList');
 
       return shopList;
     } else {

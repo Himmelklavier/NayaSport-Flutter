@@ -10,6 +10,7 @@ import 'package:prueba/domain/entities/uniforme.dart';
 import 'package:prueba/ui/pages/products/widgets/button_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class ProductCard extends StatefulWidget {
   final Uniforme uniforme;
   final int id;
@@ -59,6 +60,7 @@ class _ProductCardState extends State<ProductCard> {
     ),
     "titleMessage": "Error al agregar al producto",
   };
+  
 
   void _alertProductCard(BuildContext context, info) {
     showDialog(
@@ -80,6 +82,23 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
+  Uint8List _extractAndDecodeBase64Image(dynamic imagenData) {
+    
+    if (imagenData is String && imagenData.isNotEmpty) {
+      try {
+        debugPrint('imagen es string y no es empty, decodificando');
+        return base64.decode(imagenData);
+       
+      } catch (error) {
+        print('Error decoding Base64 image: $error');
+        return Uint8List(0); // Empty list on error
+      }
+    } else {
+      debugPrint('imagen no es String o is empty');
+      return Uint8List(0); // Empty list if imagenData is not a String
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -89,9 +108,23 @@ class _ProductCardState extends State<ProductCard> {
         children: <Widget>[
           Expanded(
               child: Column(children: [
+                //imagen en base 64
+                widget.uniforme.imagen.isEmpty
+                          ? const Icon(Icons.error)
+                          : Image.memory(
+                              _extractAndDecodeBase64Image(
+                                  widget.uniforme.imagen.toString()),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Text(
+                                  'Error loading image: ${error.toString()}',
+                                );
+                              },
+                            ),
             ListTile(
               title: Text(widget.uniforme.nombre.toString()),
               subtitle: Text(widget.uniforme.precioVenta.toString()),
+
             ),
             Expanded(
                 child: Row(

@@ -29,19 +29,19 @@ class _ShopCardState extends State<ShopCard> {
             child: ListTile(
               title: Text(widget.shop.nombre),
               subtitle: Text(widget.shop.precio),
-               trailing: Text('cantidad : ${widget.shop.cantidad}',
-                style: const TextStyle(fontSize: 20),
+               trailing: Text('Cantidad : ${widget.shop.cantidad}',
+                style: const TextStyle(fontSize: 18),
               ),
             ),
           ),
-          TextButton(
+          /* TextButton(
               onPressed: () {
                 if (widget.pressDelete != null) {
                   widget.pressDelete!();
                 }
               },
               child: const Icon(Icons.delete,
-                  color: Color.fromARGB(255, 240, 0, 0)))
+                  color: Color.fromARGB(255, 240, 0, 0))) */
         ],
       ),
     );

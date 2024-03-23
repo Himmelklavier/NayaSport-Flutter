@@ -41,7 +41,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
 
     var headers = {'Content-Type': 'multipart/form-data'};
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://192.168.0.8:3001/api/productos'));
+        'POST', Uri.parse('http://192.168.12.156:3001/api/productos'));
     request.fields.addAll({
       'referencia': product.ref,
       'precio_int': product.cost.toString(),
@@ -74,7 +74,14 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard',
+        style: TextStyle(
+        color: Colors.white),),
+        backgroundColor: Colors.cyan
+      ),
+      body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/BackgroundWhite.webp'),
@@ -228,7 +235,7 @@ class _DashboardAddProductState extends State<DashboardAddProduct> {
                             ),
                             if (_file != null) Image.file(_file!)
                           ],
-                        ))))));
+                        )))))));
   }
 
   void _showData(BuildContext context) {

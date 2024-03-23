@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:prueba/data/services/shop/shop_service_impl.dart';
 import 'package:prueba/ui/pages/shop/widgets/shop_card.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:prueba/domain/entities/Shop.dart';
 
 class ListViewShop extends StatefulWidget {
-  const ListViewShop({super.key});
+  final int idUsuario;
+  const ListViewShop({Key? key, required this.idUsuario}):super(key:key);
 
   @override
   State<ListViewShop> createState() => _ListViewShopState();
@@ -16,26 +17,23 @@ class ListViewShop extends StatefulWidget {
 class _ListViewShopState extends State<ListViewShop> {
   var shopService = GetIt.I<ShopServiceImpl>();
 
-  late final int? idUsuario;
-
-  @override
+@override
   void initState() {
     super.initState();
-    _loadData();
+    print("idUsuarioListViewShop-> ${widget.idUsuario}");
   }
-
-  _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      idUsuario = prefs.getInt('idUsuario');
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      FutureBuilder(
-          future: shopService.getAllShop(idUsuario!),
+    return Container(
+      child: _futureShop(context)
+    );
+  }
+
+Widget _futureShop(BuildContext context){
+  return Column(
+    children:[
+      FutureBuilder<List<Shop>>(
+          future: shopService.getAllShop(widget.idUsuario),
           builder: (context, snapshot) {
             print(snapshot.connectionState);
             print('snap ${snapshot.data!.length}');
@@ -60,8 +58,8 @@ class _ListViewShopState extends State<ListViewShop> {
                   });
             }
           }),
-      FutureBuilder(
-          future: shopService.totalShop(idUsuario!),
+      FutureBuilder<double>(
+          future: shopService.totalShop(widget.idUsuario),
           builder: (context, snapshot) {
             print(snapshot.connectionState);
             print('snaptotal ${snapshot.data!}');
@@ -85,5 +83,6 @@ class _ListViewShopState extends State<ListViewShop> {
             }
           })
     ]);
-  }
+}
+
 }

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:prueba/data/services/shop/shop_service_impl.dart';
 import 'package:prueba/ui/layout/layout.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BuyShop extends StatefulWidget {
-  const BuyShop({super.key});
+  final int idUsuario;
+  const BuyShop({Key? key, required this.idUsuario}):super(key:key);
 
   @override
   State<BuyShop> createState() => _BuyShopState();
@@ -16,24 +16,14 @@ class BuyShop extends StatefulWidget {
 class _BuyShopState extends State<BuyShop> {
   var shopService = GetIt.I<ShopServiceImpl>();
 
-   late final int? idUsuario;
-
   @override
   void initState() {
     super.initState();
-    _loadData();
+    print("idUsuarioBuyShop-> ${widget.idUsuario}");
   }
-
-  _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      idUsuario = prefs.getInt('idUsuario');
-    });
-  }
-
   Future<int?> _buy(BuildContext context) async {
 
-    var response = await shopService.deleteAllShop(idUsuario!);
+    var response = await shopService.deleteAllShop(widget.idUsuario);
     return response;
     
   }
@@ -67,6 +57,12 @@ class _BuyShopState extends State<BuyShop> {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      child:  _shopButton(context)
+    );
+    
+  }
+  Widget _shopButton (BuildContext context){
     return ElevatedButton(
         onPressed: () async {
           var res = await _buy(context);

@@ -15,7 +15,7 @@ class AuthServiceImpl implements AuthRepository {
 
     // Realiza la solicitud HTTP
     final response = await http.post(
-      Uri.parse('http://192.168.0.3:3001/api/auth/login'),
+      Uri.parse('http://192.168.12.156:3001/api/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -54,7 +54,7 @@ class AuthServiceImpl implements AuthRepository {
 
     // Realiza la solicitud HTTP
     final response = await http.post(
-      Uri.parse('http://192.168.0.3:3001/api/auth/register'),
+      Uri.parse('http://192.168.12.156:3001/api/auth/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

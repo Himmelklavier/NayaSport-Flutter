@@ -5,7 +5,7 @@ import 'package:prueba/domain/entities/uniforme.dart';
 import 'package:prueba/domain/repositories/product_repository.dart';
 
 class ProductsServiceImpl implements ProductRepository {
-  final baseApi = "http://192.168.0.3:3001/api/productos";
+  final baseApi = "http://192.168.12.156:3001/api/productos";
 
   @override
   Future<List<Uniforme>> getAllProducts() async {
@@ -16,8 +16,12 @@ class ProductsServiceImpl implements ProductRepository {
 
     if (response.statusCode == 200) {
       var decodeData = jsonDecode(response.body);
+      //print("response body-> ${response.body}");
       List<Uniforme> products =
           decodeData.map<Uniforme>((e) => Uniforme.fromJson(e)).toList();
+      for (var product in products) {
+        print('Imagen del producto: ${product.imagen}');
+      }
 
       return products;
     } else {
