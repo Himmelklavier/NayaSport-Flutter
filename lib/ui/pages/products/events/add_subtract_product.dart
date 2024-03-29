@@ -1,1 +1,1 @@
-void add
+void add;

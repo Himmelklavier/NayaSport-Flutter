@@ -4,11 +4,9 @@ import 'package:prueba/ui/layout/layout.dart';
 import 'package:prueba/ui/pages/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class AuthenticationWrapper extends StatelessWidget {
- 
   const AuthenticationWrapper({super.key});
- 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
@@ -20,7 +18,9 @@ class AuthenticationWrapper extends StatelessWidget {
         } else {
           // Basado en el resultado de la verificación, muestra la página apropiada
           final bool isAuthenticated = snapshot.data ?? false;
-          return isAuthenticated ? const LayoutPage() : const LoginPage();
+          return isAuthenticated
+              ? const LayoutPage(index: 0)
+              : const LoginPage();
         }
       },
     );
@@ -31,6 +31,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('accessToken')) {
       final accessToken = prefs.getString('accessToken');
+      // ignore: avoid_print
       print('AccessToken: $accessToken');
       return true;
     } else {

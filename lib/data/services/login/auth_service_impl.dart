@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthServiceImpl implements AuthRepository {
   @override
   Future<int?> login(String email, String password) async {
-    
     final Map<String, dynamic> data = {
       'email': email,
       'password': password,
@@ -15,13 +14,13 @@ class AuthServiceImpl implements AuthRepository {
 
     // Realiza la solicitud HTTP
     final response = await http.post(
-      Uri.parse('http://192.168.12.156:3001/api/auth/login'),
+      Uri.parse('http://192.168.1.11:3001/api/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(data),
     );
-    
+
     // Comprueba el código de estado de la respuesta
     if (response.statusCode == 200) {
       // Si la solicitud es exitosa, decodifica la respuesta JSON
@@ -54,13 +53,13 @@ class AuthServiceImpl implements AuthRepository {
 
     // Realiza la solicitud HTTP
     final response = await http.post(
-      Uri.parse('http://192.168.12.156:3001/api/auth/register'),
+      Uri.parse('http://192.168.1.11:3001/api/auth/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(data),
     );
-    
+
     // Comprueba el código de estado de la respuesta
     if (response.statusCode == 201) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);

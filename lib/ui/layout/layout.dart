@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -8,12 +10,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LayoutPage extends StatefulWidget {
   final int index;
-  const LayoutPage({Key});
+  const LayoutPage({super.key, required this.index});
 
   @override
   State<LayoutPage> createState() => _LayoutPageState();
 }
-
 
 class _LayoutPageState extends State<LayoutPage> {
   int index = 0;
@@ -36,9 +37,8 @@ class _LayoutPageState extends State<LayoutPage> {
         icon: Icon(Icons.shopping_cart),
         label: 'Carrito compras',
       ),
-    
     ];
-    Future<void> _logout(BuildContext context) async{
+    Future<void> logout(BuildContext context) async {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('accessToken');
       await prefs.remove('idUsuario');
@@ -56,7 +56,7 @@ class _LayoutPageState extends State<LayoutPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset('assets/logo2.svg', height:45),
+              SvgPicture.asset('assets/logo2.svg', height: 45),
               const SizedBox(width: 10.0),
               const Text(
                 title,
@@ -67,8 +67,8 @@ class _LayoutPageState extends State<LayoutPage> {
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.logout),
-                onPressed: () => _logout(context),
+                icon: const Icon(Icons.logout),
+                onPressed: () => logout(context),
               )
             ],
           ),

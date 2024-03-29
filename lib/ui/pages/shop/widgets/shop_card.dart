@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -11,8 +11,7 @@ class ShopCard extends StatefulWidget {
   final VoidCallback? pressDelete;
 
   const ShopCard(
-      {Key? key, required this.shop, required this.id, this.pressDelete})
-      : super(key: key);
+      {super.key, required this.shop, required this.id, this.pressDelete});
 
   @override
   State<ShopCard> createState() => _ShopCardState();
@@ -29,7 +28,8 @@ class _ShopCardState extends State<ShopCard> {
             child: ListTile(
               title: Text(widget.shop.nombre),
               subtitle: Text(widget.shop.precio),
-               trailing: Text('Cantidad : ${widget.shop.cantidad}',
+              trailing: Text(
+                'Cantidad : ${widget.shop.cantidad}',
                 style: const TextStyle(fontSize: 18),
               ),
             ),

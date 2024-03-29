@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
 
 class MyImage {
@@ -7,7 +6,7 @@ class MyImage {
 
   MyImage({required this.source});
 
-   Future pick({onPick}) async {
+  Future pick({onPick}) async {
     final ImagePicker picker = ImagePicker();
     final image = await picker.pickImage(source: source);
 

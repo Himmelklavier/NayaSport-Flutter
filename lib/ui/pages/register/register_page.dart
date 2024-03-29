@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:prueba/domain/usecases/login/login_use_case.dart';
@@ -39,19 +41,20 @@ class _RegisterPageState extends State<RegisterPage> {
                 'assets/logo.svg',
                 width: 200,
               ),
-              SizedBox(height: 30), // Espacio entre el logo y el contenedor
+              const SizedBox(
+                  height: 30), // Espacio entre el logo y el contenedor
               TextFieldContainer(
                 // Usa el widget TextFieldContainer
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight
                             .bold, // Establece el peso de la fuente en negrita
                       ),
                       controller: _usernameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Usuario',
                         labelStyle: TextStyle(color: Colors.black),
                         enabledBorder: UnderlineInputBorder(
@@ -63,14 +66,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     TextField(
                       controller: _passwordController,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight
                             .bold, // Establece el peso de la fuente en negrita
                       ),
                       decoration: InputDecoration(
                         labelText: 'Contraseña',
-                        labelStyle: TextStyle(color: Colors.black),
-                        enabledBorder: UnderlineInputBorder(
+                        labelStyle: const TextStyle(color: Colors.black),
+                        enabledBorder: const UnderlineInputBorder(
                           // Cambia el color de la línea debajo del texto
                           borderSide: BorderSide(
                               color: Colors.grey), // Especifica el color blanco
@@ -78,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         suffixIcon: IconButton(
                           onPressed:
                               () {}, // Función para alternar visibilidad de la contraseña
-                          icon: Icon(Icons.password),
+                          icon: const Icon(Icons.password),
                         ),
                       ),
                     ),
@@ -87,10 +90,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                  backgroundColor: Color(0xFF18B9C3),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  backgroundColor: const Color(0xFF18B9C3),
                 ),
-                child: Text(
+                child: const Text(
                   'Registrarse',
                   style: TextStyle(
                     color: Colors.white,
@@ -108,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LayoutPage()),
+                          builder: (context) => const LayoutPage(index: 0)),
                     );
                   } else {
                     _showRegisterFailedAlert(context);
@@ -127,14 +131,14 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Register Failed'),
-          content: Text('Please try again.'),
+          title: const Text('Register Failed'),
+          content: const Text('Please try again.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Cierra el diálogo
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

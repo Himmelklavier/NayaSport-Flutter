@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -5,7 +7,7 @@ import 'package:prueba/domain/entities/Shop.dart';
 import 'package:prueba/domain/repositories/shop_repository.dart';
 
 class ShopServiceImpl implements ShopRepository {
-  final baseApi = "http://192.168.12.156:3001/api/cart";
+  final baseApi = "http://192.168.1.11:3001/api/cart";
 
   @override
   Future<int?> addProductShop(
@@ -61,10 +63,8 @@ class ShopServiceImpl implements ShopRepository {
   }
 
   @override
-  Future<int?> deleteProductShop(int idProducto, int idUsuario) {
-    // TODO: implement deleteProductProductShop
-    throw UnimplementedError();
-  }
+  Future<int?> deleteProductShop(int idProducto, int idUsuario) =>
+      throw UnimplementedError();
 
   @override
   Future<List<Shop>> getAllShop(int idUsuario) async {

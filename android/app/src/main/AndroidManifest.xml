@@ -7,9 +7,9 @@
     
 
     <application
-        android:label="prueba"
+        android:label="NayaSport"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/naya_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,10 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:prueba/ui/layout/layout.dart';
 import 'package:prueba/ui/pages/dashboard/dashboard_add_product/dashboard_add_product.dart';
 import 'package:prueba/ui/pages/dashboard/dashboard_page.dart';
 import 'package:prueba/ui/pages/home/home_page.dart';
 import 'package:prueba/ui/pages/login/login_page.dart';
-import 'package:prueba/ui/pages/login/widgets/authWrapper.dart';
+import 'package:prueba/ui/pages/login/widgets/auth_wrapper.dart';
 import 'package:prueba/ui/pages/products/products_page.dart';
 import 'package:prueba/ui/pages/register/register_page.dart';
 import 'package:prueba/ui/pages/shop/shop_page.dart';
@@ -35,7 +37,7 @@ const List<Widget> screens = <Widget>[
   HomePage(),
   ProductsPage(),
   ShopPage(),
- 
+
   //DashboardPage(),
 
   //DashboardAddProduct(),

@@ -3,7 +3,7 @@ import 'package:prueba/ui/pages/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

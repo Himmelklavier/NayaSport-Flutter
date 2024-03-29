@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -20,7 +20,6 @@ class GridViewProducts extends StatefulWidget {
 class _GridViewProductsState extends State<GridViewProducts> {
   var productsService = GetIt.I<ProductsServiceImpl>();
   late final Future<List<Uniforme>> productsFuture;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,7 @@ class _GridViewProductsState extends State<GridViewProducts> {
             children: data.asMap().entries.map((entry) {
               int index = entry.key;
               var uniforme = entry.value;
-              return ProductCard(
-                  id: index, uniforme: uniforme );
+              return ProductCard(id: index, uniforme: uniforme);
             }).toList(),
           );
         } else if (snapshot.hasError) {
@@ -51,4 +49,3 @@ class _GridViewProductsState extends State<GridViewProducts> {
     );
   }
 }
-

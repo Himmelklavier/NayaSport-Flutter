@@ -8,7 +8,7 @@ import 'package:prueba/domain/entities/Shop.dart';
 
 class ListViewShop extends StatefulWidget {
   final int idUsuario;
-  const ListViewShop({Key? key, required this.idUsuario}):super(key:key);
+  const ListViewShop({super.key, required this.idUsuario});
 
   @override
   State<ListViewShop> createState() => _ListViewShopState();
@@ -17,27 +17,25 @@ class ListViewShop extends StatefulWidget {
 class _ListViewShopState extends State<ListViewShop> {
   var shopService = GetIt.I<ShopServiceImpl>();
 
-@override
+  @override
   void initState() {
     super.initState();
     print("idUsuarioListViewShop-> ${widget.idUsuario}");
   }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _futureShop(context)
-    );
+    return Container(child: _futureShop(context));
   }
 
-Widget _futureShop(BuildContext context){
-  return Column(
-    children:[
+  Widget _futureShop(BuildContext context) {
+    return Column(children: [
       FutureBuilder<List<Shop>>(
           future: shopService.getAllShop(widget.idUsuario),
           builder: (context, snapshot) {
             print(snapshot.connectionState);
-            print('snap ${snapshot.data!.length}');
-            print('dTA ${snapshot.data!}');
+            print('snap ${snapshot.data?.length ?? 0}');
+            print('dTA ${snapshot.data?.toString() ?? "Carrito vacio"}');
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.data!.isEmpty) {
@@ -62,7 +60,9 @@ Widget _futureShop(BuildContext context){
           future: shopService.totalShop(widget.idUsuario),
           builder: (context, snapshot) {
             print(snapshot.connectionState);
-            print('snaptotal ${snapshot.data!}');
+            print(
+                'snaptotal ${snapshot.data?.toString() ?? "El carrito está vacío"}');
+
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
@@ -83,6 +83,5 @@ Widget _futureShop(BuildContext context){
             }
           })
     ]);
-}
-
+  }
 }

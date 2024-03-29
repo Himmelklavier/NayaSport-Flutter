@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -123,19 +123,22 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LayoutPage()));
+                            builder: (context) => const LayoutPage(index: 0)));
                   }
                 },
               ),
-              SizedBox(height: 10), // Espacio entre el botón de inicio de sesión y el botón de registro
+              const SizedBox(
+                  height:
+                      10), // Espacio entre el botón de inicio de sesión y el botón de registro
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterPage()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   '¿No tienes una cuenta? Regístrate aquí',
                   style: TextStyle(
                     color: Colors.black,
@@ -156,7 +159,8 @@ class _LoginPageState extends State<LoginPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Login Failed'),
-          content: Text('Incorrect username or password. Please try again.'),
+          content:
+              const Text('Incorrect username or password. Please try again.'),
           actions: [
             TextButton(
               onPressed: () {

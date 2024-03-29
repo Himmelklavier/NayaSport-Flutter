@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -5,7 +7,7 @@ import 'package:prueba/domain/entities/uniforme.dart';
 import 'package:prueba/domain/repositories/product_repository.dart';
 
 class ProductsServiceImpl implements ProductRepository {
-  final baseApi = "http://192.168.12.156:3001/api/productos";
+  final baseApi = "http://192.168.1.11:3001/api/productos";
 
   @override
   Future<List<Uniforme>> getAllProducts() async {

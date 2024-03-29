@@ -6,24 +6,24 @@ class RoundedButton extends StatelessWidget {
   final Color color, textColor;
 
   const RoundedButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.press,
     this.color = const Color(0xFF18B9C3),
     this.textColor = Colors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       width: MediaQuery.of(context).size.width * 0.8,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: TextButton(
           onPressed: press,
           style: TextButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
             backgroundColor: color,
           ),
           child: Text(

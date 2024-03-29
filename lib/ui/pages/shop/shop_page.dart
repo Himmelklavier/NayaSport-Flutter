@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -30,29 +30,28 @@ class _ShopPageState extends State<ShopPage> {
     setState(() {
       idUsuario = prefs.getInt('idUsuario');
       print('idUsuarioShopePage->$idUsuario');
-     
     });
-    if(idUsuario!=null){
-       idExist=true;
+    if (idUsuario != null) {
+      idExist = true;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tienda'),
-      ),
-      body: Center(
-        child: !idExist ? CircularProgressIndicator() : _columnWidgets(context, idUsuario!)
-     ));
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Tienda'),
+        ),
+        body: Center(
+            child: !idExist
+                ? const CircularProgressIndicator()
+                : _columnWidgets(context, idUsuario!)));
   }
-  Widget _columnWidgets(BuildContext context, int idUsuario){
-    return Column(
-         children: [
-          ListViewShop(idUsuario: idUsuario),
-          BuyShop(idUsuario: idUsuario),
-         ]
-        );
+
+  Widget _columnWidgets(BuildContext context, int idUsuario) {
+    return Column(children: [
+      ListViewShop(idUsuario: idUsuario),
+      BuyShop(idUsuario: idUsuario),
+    ]);
   }
 }

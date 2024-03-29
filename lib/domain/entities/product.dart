@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_getters_setters
+
 class Product {
   late String _productName;
   late int _cost;
@@ -7,17 +9,16 @@ class Product {
   late String _description;
   late int _category;
   late String _brand;
-  
 
   Product.empty() {
-    _productName = '';
+    _productName = 'Empty';
     _cost = 0;
     _sellingPrice = 0;
-    _size = null;
+    _size = 'empty';
     _ref = '';
-    _description = '';
-    _category = 0;
-    _brand = '';
+    _description = 'empty';
+    _category = 1;
+    _brand = 'empty';
   }
 
   Product(this._productName, this._cost, this._sellingPrice, this._size,
